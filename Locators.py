@@ -4,14 +4,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+import time
+
 service = Service(executable_path = "C:\Drivers\chromedriver-win64\chromedriver.exe")
 driver = webdriver.Chrome(service = service)
 
 driver.get("https://www.ebay.com/")
 driver.maximize_window()
 
-
-element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "viewport")))
+WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "vl-carousel__item")))
 
 sliders = driver.find_elements(By.CLASS_NAME, 'vl-carousel__item')
 print(len(sliders))
@@ -26,7 +27,10 @@ print(len(links))
 
 driver.find_element(By.XPATH, "//*[@id='mainContent']/div[1]/div/div[2]/div[3]/div[2]/div/a/div[2]").click()
 
-abc = input("Enter a key to continue")
+time.sleep(3)
+
+driver.close()
+
 
 
 # Notes for more locators using CSS_SELECTOR
